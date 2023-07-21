@@ -63,3 +63,16 @@
   color: white;
   transition: 0.5s;
 }
+
+/* Hero Classes */
+.hero-btn {
+  border: none;
+  border-radius: 50px;
+  background-color: var(--primary);
+  color: white;
+  transition: all 0.3s ease 0s;
+}
+
+.hero-btn:hover {
+  background-color: var(--secondary);
+}
