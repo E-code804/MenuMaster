@@ -15,6 +15,11 @@ const getRestaurants = async (req, res) => {
 };
 
 // get a single restaurant
+const getOneRestaurant = async (req, res) => {
+  const id = req.params.id;
+  const restaurant = await Restaurant.findById(id);
+  res.status(200).json(restaurant);
+};
 
 // create a new review
 const createReview = async (req, res) => {
@@ -53,18 +58,19 @@ const updateReview = async (req, res) => {
       "user_reviews.revId": id2,
     },
     {
-      $set: { "user_reviews.$.ratingReview": 2 },
+      $set: { "user_reviews.$.ratingReview": 5 },
     }
   )
     .then((result) => {
-      if (result.acknowledged) {
+      console.log(result);
+      if (result.modifiedCount > 0) {
         res.status(200).json({ msg: "Updated" });
       } else {
-        res.status(400).json({ msg: "Not found" });
+        res.status(404).json({ msg: "Not found" });
       }
     })
     .catch((err) => {
-      res.status(400).json({ msg: err.message });
+      res.status(500).json({ msg: err.message });
     });
 };
 
