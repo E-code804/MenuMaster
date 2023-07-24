@@ -4,23 +4,21 @@ const {
   createReview,
   getRestaurants,
   updateReview,
+  getOneRestaurant,
+  deleteReview,
 } = require("../controllers/reviewController");
 
 // Get all restaurants
 router.get("/", getRestaurants);
 
 // Get a single restaurant.
-router.get("/:id", (req, res) => {
-  res.json({ msg: "GET a restaurant." });
-});
+router.get("/:id", getOneRestaurant);
 
 // Post a restaurant review.
 router.post("/:id", createReview);
 
 // Delete a restaurant review.
-router.delete("/:id", (req, res) => {
-  res.json({ msg: "Delete a restaurant review" });
-});
+router.delete("/:id1/:id2", deleteReview);
 
 // Update a restaurant review.
 router.patch("/:id1/:id2", updateReview);
