@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 const restaurantRoutes = require("./routes/restaurants");
+const userRoutes = require("./routes/users");
 const mongoose = require("mongoose");
 
 // Middleware
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 
 // Using restaurant routes
 app.use("/api/restaurants", restaurantRoutes); // url looks like /api/restaurants/SPECIFIC_ROUTE_FROM_ROUTER
+app.use("/api/users", userRoutes);
 
 // Connect to DB
 mongoose
