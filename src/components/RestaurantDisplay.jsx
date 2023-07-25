@@ -26,7 +26,7 @@ const RestaurantDisplay = () => {
 }, [])
 
   return (
-    <div className="display-restaurants w-full padding-x">
+    <div id="scrollTarget" className="display-restaurants w-full padding-x">
         {/* Have a Form input for filtering based on ratings and price level. */}
         <div className="w-full flex flex-col items-center">
           <h1 id="rest-display-title" 

@@ -1,5 +1,6 @@
 import React from 'react'
 import HeroImage from './HeroImage'
+import { Link } from 'react-scroll'
 
 const Hero = () => {
   return (
@@ -13,7 +14,9 @@ const Hero = () => {
                 Discover new flavors catered to your tastes.
             </p>
 
-            <button type="button" className="custom-btn hero-btn mt-10">Explore</button>
+            <button type="button" className="custom-btn hero-btn mt-10">
+                <Link to="scrollTarget" smooth={true} duration={500}>Explore</Link>
+            </button>
         </div>
 
         <div className="flex mt-36 items-center max-xl:justify-center max-xl:mt-20">
