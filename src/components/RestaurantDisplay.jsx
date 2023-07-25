@@ -1,10 +1,11 @@
 import React from 'react'
 import Restaurant from './Restaurant'
+import QueryForm from './QueryForm'
 import { useState, useEffect } from 'react'
 
 const RestaurantDisplay = () => {
   const [restaurants, setRestaurants] = useState([])
-
+  const [origRestaurants, setOrigRestaurants] = useState([])
   
   useEffect( () => {
     const fetchRestaurants = () => {
@@ -16,6 +17,7 @@ const RestaurantDisplay = () => {
         return response.json()
       }).then( json => {
         setRestaurants(json)
+        setOrigRestaurants(json)
       }).catch(err => {
         console.log(err);
       })
@@ -26,10 +28,13 @@ const RestaurantDisplay = () => {
   return (
     <div className="display-restaurants w-full padding-x">
         {/* Have a Form input for filtering based on ratings and price level. */}
-        <div className="w-full flex justify-center">
-          <h1 id="rest-display-title" className="mt-4 2xl:text-[48px] sm:text-[32px] text-[50px] max-sm:text-[48px] font-extrabold">
+        <div className="w-full flex flex-col items-center">
+          <h1 id="rest-display-title" 
+              className="mt-4 2xl:text-[48px] sm:text-[32px] text-[50px] max-sm:text-[48px] font-extrabold"
+          >
             Discover something new
           </h1>
+          <QueryForm restaurants={restaurants} origRestaurants={origRestaurants} setRestaurants={setRestaurants} />
         </div>
         <div className="container px-5 py-24 mx-auto flex flex-wrap justify-center">
           {restaurants && restaurants.map(r => (
