@@ -79,7 +79,7 @@
 
 /* Restaurant Display Classes  */
 .display-restaurants {
-  background-color: #ca3433;
+  background-color: var(--secondary);
 }
 
 .restaurant-main-card {
@@ -92,11 +92,55 @@
   height: 300px;
 }
 
-/* .item {
-  width: calc(33.33% - 10px); 
-  flex-basis: 33%;
-  margin: 5px; 
-  background-color: #f0f0f0;
+#rest-display-title {
+  color: white;
+}
+
+/* Restaurant Details Classes */
+
+.rest-card__btn {
+  position: absolute;
+  transform: translate(5%, -290%);
+  visibility: hidden;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--primary);
+  color: white;
+  transition: all 0.3s ease 0s;
+  width: 90%;
+}
+
+.rest-card__btn:hover {
+  background-color: var(--secondary);
+}
+
+/* new workout form */
+label, input {
+  display: block;
+}
+input {
   padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   box-sizing: border-box;
-} */
+}
+form button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+}
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}

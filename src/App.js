@@ -1,14 +1,17 @@
 import "./App.css";
-import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
-import RestaurantDisplay from "./components/RestaurantDisplay";
+import Home from "./pages/Home";
+import RestaurantPage from "./pages/RestaurantPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Hero />
-      <RestaurantDisplay />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/:restId" element={<RestaurantPage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

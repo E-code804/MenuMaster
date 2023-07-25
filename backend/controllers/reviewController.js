@@ -1,8 +1,8 @@
 const { format } = require("date-fns");
 // const Review = require("../models/ReviewModel");
 const Restaurant = require("../models/RestaurantModel");
-const { v4: uuidv4 } = require("uuid");
 const mongoose = require("mongoose");
+const { v4: uuidv4 } = require("uuid");
 
 // These kind of functions will replace the traditional
 // (req, res) in the routes folder
@@ -10,6 +10,8 @@ const mongoose = require("mongoose");
 // get all restaurants
 const getRestaurants = async (req, res) => {
   const restaurants = await Restaurant.find({});
+  // Sending an array of docs from DB, so when fetching this
+  // You must convert to json. i.e: json = await res.json()
   res.status(200).json(restaurants);
 };
 
@@ -59,7 +61,12 @@ const createReview = async (req, res) => {
     const newRating =
       (currentRating * currentNumReviews + ratingReview) /
       (currentNumReviews + 1);
-    console.log(newRating);
+    // console.log(currentRating);
+    // console.log(currentNumReviews);
+    // console.log(currentRating * currentNumReviews);
+    // console.log(ratingReview);
+    // console.log(currentNumReviews + 1);
+    // console.log(newRating);
 
     const restaurant = await Restaurant.findOneAndUpdate(
       { _id: id },
@@ -75,7 +82,8 @@ const createReview = async (req, res) => {
 
     rest.user_reviews.push(review);
     await rest.save();
-    res.status(200).json(review);
+    const numReview = currentNumReviews + 1;
+    res.status(200).json({ review, newRating, numReview });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -99,7 +107,7 @@ const deleteReview = async (req, res) => {
   const currentRating = parseFloat(currentRestaurant.rating);
   const currentNumReviews = parseInt(currentRestaurant.num_reviews);
 
-  Restaurant.findOne({ _id: id1, "user_reviews.revId": id2 })
+  Restaurant.findOne({ _id: id1 })
     .then((foundRestaurant) => {
       if (foundRestaurant) {
         const userReview = foundRestaurant.user_reviews.find(
@@ -107,7 +115,7 @@ const deleteReview = async (req, res) => {
         );
         if (userReview) {
           const oldRating = userReview.ratingReview;
-          const newRating =
+          const newRating = // make a var for ratingView that is 0 in this scenario for func refactor.
             (currentRating * currentNumReviews - oldRating) /
             (currentNumReviews - 1);
           console.log(newRating);
@@ -122,10 +130,11 @@ const deleteReview = async (req, res) => {
             }
           )
             .then((result) => {
+              const numReviews = currentNumReviews - 1;
               if (result.modifiedCount > 0) {
-                res.status(200).json({ foundRestaurant });
+                res.status(200).json({ id2, newRating, numReviews });
               } else {
-                res.status(404).json({ err: "No such review found" });
+                res.status(404).json({ err: "Could not update review." });
               }
             })
             .catch((err) => {
