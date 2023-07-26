@@ -15,7 +15,7 @@ const Restaurant = ({id, name, url, rating, num_reviews}) => {
         <Link to={`/${id}`} className="absolute inset-0">
           <button
             type="button"
-            className="custom-btn rest-card__btn group-hover:visible absolute bottom-[-15px] left-0 right-4"
+            className="custom-btn rest-card__btn group-hover:visible absolute bottom-[-120px] left-0 right-4"
           >
             See more
           </button>
