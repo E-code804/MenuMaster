@@ -8,13 +8,7 @@ const mongoose = require("mongoose");
 
 // Middleware.
 app.use(express.json()); // This looks for if the request has data in it, and if it does it will attach to the req variable.
-app.use(
-  cors({
-    origin: ["https://menu-master-ten.vercel.app/"],
-    methods: ["POST", "GET", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use((req, res, next) => {
   // This func fires for every request that comes in.
   // Must call the "next" function in order to move onto next piece of middleware.
