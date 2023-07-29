@@ -1,5 +1,4 @@
 const User = require("../models/UserModel");
-const mongoose = require("mongoose");
 
 const getUser = async (req, res) => {
   const { userName } = req.params;
