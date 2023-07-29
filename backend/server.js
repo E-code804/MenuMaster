@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 app.use(express.json()); // This looks for if the request has data in it, and if it does it will attach to the req variable.
 app.use(
   cors({
-    origin: ["https://menumaster.vercel.app"],
+    origin: ["https://menu-master.vercel.app"],
     methods: ["POST", "GET", "DELETE"],
     credentials: true,
   })
