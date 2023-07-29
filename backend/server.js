@@ -6,7 +6,7 @@ const restaurantRoutes = require("./routes/restaurants");
 const userRoutes = require("./routes/users");
 const mongoose = require("mongoose");
 
-// Middleware
+// Middleware.
 app.use(express.json()); // This looks for if the request has data in it, and if it does it will attach to the req variable.
 app.use(
   cors({
