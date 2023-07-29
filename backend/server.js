@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 app.use(express.json()); // This looks for if the request has data in it, and if it does it will attach to the req variable.
 app.use(
   cors({
-    origin: ["https://menu-master.vercel.app"],
+    origin: ["https://menu-master-ten.vercel.app/"],
     methods: ["POST", "GET", "DELETE"],
     credentials: true,
   })
@@ -36,9 +36,11 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     // Listening for requests at a certain port
-    app.listen(process.env.PORT, () => {
-      console.log("Connected to DB and listening on port", process.env.PORT);
-    });
+    if (process.env.PORT) {
+      app.listen(process.env.PORT, () => {
+        console.log("Connected to DB and listening on port", process.env.PORT);
+      });
+    }
   })
   .catch((err) => {
     console.log(err);
@@ -46,3 +48,4 @@ mongoose
 // const { v4: uuidv4 } = require("uuid");
 // const id = uuidv4();
 // console.log(id);
+module.exports = app;
