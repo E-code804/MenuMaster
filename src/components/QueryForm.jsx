@@ -1,50 +1,49 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 
-const QueryForm = ({restaurants, origRestaurants, setRestaurants}) => {
-    const [price, setPrice] = useState("None")
-    const [cuisine, setCuisine] = useState("None")
-    const cuisineSet = new Set()
-    cuisineSet.add("None")
+const QueryForm = ({ restaurants, origRestaurants, setRestaurants }) => {
+  const [price, setPrice] = useState("None");
+  const [cuisine, setCuisine] = useState("None");
+  const cuisineSet = new Set();
+  cuisineSet.add("None");
 
-    // Store all cuisines into the set
-    origRestaurants.forEach(r => {
-        r.cuisine.forEach(c => cuisineSet.add(c))
-    })
+  // Store all cuisines into the set
+  origRestaurants.forEach((r) => {
+    r.cuisine.forEach((c) => cuisineSet.add(c));
+  });
 
-    const inPriceRange = (restaurantPriceRange) => {
-        if (restaurantPriceRange === "$") {
-            return restaurantPriceRange === price
-        } else if (restaurantPriceRange === "$$") {
-            return restaurantPriceRange === price
-        } else if (restaurantPriceRange.replace(/\s/g, '') === "$$-$$$") {
-            return price === "$$" || price === "$$$"
-        } else if (restaurantPriceRange === "$$$$") {
-            return restaurantPriceRange === price 
-        } else {
-            return false
-        }
+  const inPriceRange = (restaurantPriceRange) => {
+    if (restaurantPriceRange === "$") {
+      return restaurantPriceRange === price;
+    } else if (restaurantPriceRange === "$$") {
+      return restaurantPriceRange === price;
+    } else if (restaurantPriceRange.replace(/\s/g, "") === "$$-$$$") {
+      return price === "$$" || price === "$$$";
+    } else if (restaurantPriceRange === "$$$$") {
+      return restaurantPriceRange === price;
+    } else {
+      return false;
     }
+  };
 
-    // handleSubmit will return the array given in the props
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        // send the setRestaurants down here
-        var newRestaurants = []
-        
-        newRestaurants = origRestaurants.filter(r => {
-            if (price === "None" && cuisine === "None") {
-              console.log("TRUE");
-                return true
-            } else if (price !== "None" && cuisine === "None") {
-                return inPriceRange(r.price_level)
-            } else if (price === "None" && cuisine !== "None") {
-                return r.cuisine.includes(cuisine)
-            } else {
-                return inPriceRange(r.price_level) && r.cuisine.includes(cuisine)
-            }
-        })
-        setRestaurants(newRestaurants);
-    }
+  // handleSubmit will return the array given in the props
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // send the setRestaurants down here
+    var newRestaurants = [];
+
+    newRestaurants = origRestaurants.filter((r) => {
+      if (price === "None" && cuisine === "None") {
+        return true;
+      } else if (price !== "None" && cuisine === "None") {
+        return inPriceRange(r.price_level);
+      } else if (price === "None" && cuisine !== "None") {
+        return r.cuisine.includes(cuisine);
+      } else {
+        return inPriceRange(r.price_level) && r.cuisine.includes(cuisine);
+      }
+    });
+    setRestaurants(newRestaurants);
+  };
   return (
     <form onSubmit={handleSubmit} className="flex mt-4 flex-col items-center">
       <label htmlFor="prices" className="font-bold text-lg mb-2  text-white">
@@ -63,7 +62,10 @@ const QueryForm = ({restaurants, origRestaurants, setRestaurants}) => {
         <option value="$$$$">$$$$</option>
       </select>
 
-      <label htmlFor="cuisine" className="font-bold text-lg mt-4 mb-2 text-white">
+      <label
+        htmlFor="cuisine"
+        className="font-bold text-lg mt-4 mb-2 text-white"
+      >
         Select your preferred cuisine
       </label>
       <select
@@ -86,7 +88,7 @@ const QueryForm = ({restaurants, origRestaurants, setRestaurants}) => {
         Submit
       </button>
     </form>
-  )
-}
+  );
+};
 
-export default QueryForm
+export default QueryForm;

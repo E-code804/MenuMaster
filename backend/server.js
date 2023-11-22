@@ -30,11 +30,10 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     // Listening for requests at a certain port
-    if (process.env.PORT) {
-      app.listen(process.env.PORT, () => {
-        console.log("Connected to DB and listening on port", process.env.PORT);
-      });
-    }
+    const PORT = process.env.PORT || 4000;
+    app.listen(PORT, () => {
+      console.log("Connected to DB and listening on port", PORT);
+    });
   })
   .catch((err) => {
     console.log(err);
@@ -42,4 +41,6 @@ mongoose
 // const { v4: uuidv4 } = require("uuid");
 // const id = uuidv4();
 // console.log(id);
-module.exports = app;
+app.get("/", (req, res) => {
+  res.status(201).json({ message: "Connected to Backend!" });
+});
