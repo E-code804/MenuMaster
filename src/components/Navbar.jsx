@@ -10,6 +10,7 @@ const Navbar = ({ user, setUser }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const url = "https://menu-master-7zih.onrender.com";
 
   const handleSignInClick = () => {
     // If the user is empty, user has not signed in yet so display sign in
@@ -22,7 +23,7 @@ const Navbar = ({ user, setUser }) => {
 
   const handleEnterClick = async (action) => {
     if (action === "in") {
-      fetch(`http://localhost:4000/api/users/${userName}`)
+      fetch(`${url}/api/users/${userName}`)
         .then((response) => {
           if (!response.ok) {
             throw Error(
@@ -41,7 +42,7 @@ const Navbar = ({ user, setUser }) => {
           setErrorMessage(err.message);
         });
     } else {
-      fetch(`http://localhost:4000/api/users/`, {
+      fetch(`${url}/api/users/`, {
         method: "POST",
         body: JSON.stringify({ userName, password }),
         headers: {

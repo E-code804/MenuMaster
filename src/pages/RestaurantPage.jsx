@@ -9,6 +9,7 @@ const RestaurantPage = ({ user, setUser }) => {
   //const [restaurant, setRestaurant] = useState({})
   const [isLoading, setIsLoading] = useState(true);
   const { restaurant, dispatch } = useReviewsContext();
+  const url = "https://menu-master-7zih.onrender.com";
 
   // const isObjectEmpty = (obj) => {
   //   return Object.keys(obj).length === 0;
@@ -16,7 +17,7 @@ const RestaurantPage = ({ user, setUser }) => {
 
   useEffect(() => {
     const fetchRestaurant = () => {
-      fetch(`http://localhost:4000/api/restaurants/${restId}`)
+      fetch(`${url}/api/restaurants/${restId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Bad Restaurant ID");
@@ -36,12 +37,9 @@ const RestaurantPage = ({ user, setUser }) => {
   }, [dispatch, restId]);
 
   const handleClick = async (id) => {
-    const response = await fetch(
-      `http://localhost:4000/api/restaurants/${restId}/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    const response = await fetch(`${url}/api/restaurants/${restId}/${id}`, {
+      method: "DELETE",
+    });
     const json = await response.json();
 
     if (response.ok) {

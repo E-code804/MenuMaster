@@ -1,55 +1,62 @@
-import React from 'react'
-import Restaurant from './Restaurant'
-import QueryForm from './QueryForm'
-import { useState, useEffect } from 'react'
+import React, { useEffect, useState } from "react";
+import QueryForm from "./QueryForm";
+import Restaurant from "./Restaurant";
 
 const RestaurantDisplay = () => {
-  const [restaurants, setRestaurants] = useState([])
-  const [origRestaurants, setOrigRestaurants] = useState([])
-  
-  useEffect( () => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [origRestaurants, setOrigRestaurants] = useState([]);
+
+  useEffect(() => {
     const fetchRestaurants = () => {
-      fetch(`http://localhost:4000/api/restaurants/`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Bad Restaurant ID")
-        }
-        return response.json()
-      }).then( json => {
-        setRestaurants(json)
-        setOrigRestaurants(json)
-      }).catch(err => {
-        console.log(err);
-      })
-    }
-    fetchRestaurants()
-}, [])
+      fetch(`https://menu-master-7zih.onrender.com/api/restaurants/`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Bad Restaurant ID");
+          }
+          return response.json();
+        })
+        .then((json) => {
+          setRestaurants(json);
+          setOrigRestaurants(json);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fetchRestaurants();
+  }, []);
 
   return (
     <div id="scrollTarget" className="display-restaurants w-full padding-x">
-        {/* Have a Form input for filtering based on ratings and price level. */}
-        <div className="w-full flex flex-col items-center">
-          <h1 id="rest-display-title" 
-              className="mt-4 2xl:text-[48px] sm:text-[32px] text-[50px] max-sm:text-[48px] font-extrabold"
-          >
-            Discover something new
-          </h1>
-          <QueryForm restaurants={restaurants} origRestaurants={origRestaurants} setRestaurants={setRestaurants} />
-        </div>
-        <div className="container px-5 py-24 mx-auto flex flex-wrap justify-center">
-          {restaurants && restaurants.map(r => (
-            <Restaurant 
+      {/* Have a Form input for filtering based on ratings and price level. */}
+      <div className="w-full flex flex-col items-center">
+        <h1
+          id="rest-display-title"
+          className="mt-4 2xl:text-[48px] sm:text-[32px] text-[50px] max-sm:text-[48px] font-extrabold"
+        >
+          Discover something new
+        </h1>
+        <QueryForm
+          restaurants={restaurants}
+          origRestaurants={origRestaurants}
+          setRestaurants={setRestaurants}
+        />
+      </div>
+      <div className="container px-5 py-24 mx-auto flex flex-wrap justify-center">
+        {restaurants &&
+          restaurants.map((r) => (
+            <Restaurant
               key={r._id}
               id={r._id}
-              name={r.name} 
-              url={r.photo.url} 
-              rating={r.rating} 
-              num_reviews={r.num_reviews} 
+              name={r.name}
+              url={r.photo.url}
+              rating={r.rating}
+              num_reviews={r.num_reviews}
             />
           ))}
-        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default RestaurantDisplay
+export default RestaurantDisplay;

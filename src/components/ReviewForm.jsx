@@ -26,7 +26,7 @@ const ReviewForm = ({ id, user }) => {
       ratingReview: parseFloat(ratingReview),
     };
 
-    fetch(`http://localhost:4000/api/restaurants/${id}`, {
+    fetch(`https://menu-master-7zih.onrender.com/api/restaurants/${id}`, {
       method: "POST",
       body: JSON.stringify(review),
       headers: {
