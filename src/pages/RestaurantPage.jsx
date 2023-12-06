@@ -11,10 +11,6 @@ const RestaurantPage = ({ user, setUser }) => {
   const { restaurant, dispatch } = useReviewsContext();
   const url = "https://menu-master-7zih.onrender.com";
 
-  // const isObjectEmpty = (obj) => {
-  //   return Object.keys(obj).length === 0;
-  // }
-
   useEffect(() => {
     const fetchRestaurant = () => {
       fetch(`${url}/api/restaurants/${restId}`)

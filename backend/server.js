@@ -10,19 +10,12 @@ const mongoose = require("mongoose");
 app.use(express.json()); // This looks for if the request has data in it, and if it does it will attach to the req variable.
 app.use(cors());
 app.use((req, res, next) => {
-  // This func fires for every request that comes in.
-  // Must call the "next" function in order to move onto next piece of middleware.
   console.log(req.path, req.method);
   next();
 });
 
-// Reacting to requests. This is on url: 4000/
-// app.get("/", (req, res) => {
-//   res.json({ msg: "Welcome to the app" });
-// });
-
 // Using restaurant routes
-app.use("/api/restaurants", restaurantRoutes); // url looks like /api/restaurants/SPECIFIC_ROUTE_FROM_ROUTER
+app.use("/api/restaurants", restaurantRoutes);
 app.use("/api/users", userRoutes);
 
 // Connect to DB
@@ -38,9 +31,6 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-// const { v4: uuidv4 } = require("uuid");
-// const id = uuidv4();
-// console.log(id);
 app.get("/", (req, res) => {
   res.status(201).json({ message: "Connected to Backend!" });
 });

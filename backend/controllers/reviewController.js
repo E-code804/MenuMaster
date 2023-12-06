@@ -4,14 +4,9 @@ const Restaurant = require("../models/RestaurantModel");
 const mongoose = require("mongoose");
 const { v4: uuidv4 } = require("uuid");
 
-// These kind of functions will replace the traditional
-// (req, res) in the routes folder
-
 // get all restaurants
 const getRestaurants = async (req, res) => {
   const restaurants = await Restaurant.find({});
-  // Sending an array of docs from DB, so when fetching this
-  // You must convert to json. i.e: json = await res.json()
   res.status(200).json(restaurants);
 };
 
@@ -61,12 +56,6 @@ const createReview = async (req, res) => {
     const newRating =
       (currentRating * currentNumReviews + ratingReview) /
       (currentNumReviews + 1);
-    // console.log(currentRating);
-    // console.log(currentNumReviews);
-    // console.log(currentRating * currentNumReviews);
-    // console.log(ratingReview);
-    // console.log(currentNumReviews + 1);
-    // console.log(newRating);
 
     const restaurant = await Restaurant.findOneAndUpdate(
       { _id: id },
