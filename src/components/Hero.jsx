@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-scroll";
-import HeroImage from "./HeroImage";
 
 const Hero = () => {
   return (
@@ -19,16 +18,6 @@ const Hero = () => {
             Explore
           </Link>
         </button>
-      </div>
-
-      <div className="flex mt-36 items-center max-xl:justify-center max-xl:mt-20">
-        <div className="max-xl:flex-row">
-          <HeroImage foodImg="1" styles="ml-2 mb-4" />
-          {/* <HeroImage foodImg="2" styles="ml-2 mb-4" /> */}
-        </div>
-        <div className="mx-4">
-          {/* <HeroImage foodImg="3" styles="mr-1" /> */}
-        </div>
       </div>
     </div>
   );

@@ -73,7 +73,7 @@ const Navbar = ({ user, setUser }) => {
   };
 
   return (
-    <header className="w-full absolute z-10">
+    <header className="w-full z-10">
       {displaySignIn && (
         <div className="confirm-delete">
           <div className="delete-container">
